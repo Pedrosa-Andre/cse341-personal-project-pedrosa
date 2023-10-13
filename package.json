@@ -1,0 +1,34 @@
+{
+  "name": "cse-personal-project-pedrosa",
+  "version": "1.0.0",
+  "description": "API Personal Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pedrosa-Andre/cse341-personal-project-pedrosa.git"
+  },
+  "author": "André Matheus Pedrosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pedrosa-Andre/cse341-personal-project-pedrosa/issues"
+  },
+  "homepage": "https://github.com/Pedrosa-Andre/cse341-personal-project-pedrosa#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.1.0",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3"
+  }
+}
