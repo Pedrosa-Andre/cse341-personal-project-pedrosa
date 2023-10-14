@@ -1,0 +1,19 @@
+# Get all the lost objects.
+GET http://localhost:3000/objects HTTP/1.1
+
+###
+# Get an object by its ID.
+GET http://localhost:3000/objects/6529dff72ec6cdf855bb7ff6 HTTP/1.1
+
+###
+# Create new contact.
+POST http://localhost:3000/objects HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Test",
+  "description": "A test object",
+  "location_found": "Somewhere",
+  "found_by": "6529dd2d2ec6cdf855b9d6e1",
+  "date_found": "2023-03-15T14:30:00"
+}
