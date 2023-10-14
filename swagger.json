@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CSE341 - Andre Pedrosa - Personal Project",
+    "description": "An API to keep track of lost and found objects on the university",
+    "version": "1.0.0"
+  },
+  "host": "api-pedrosa-per-proj.onrender.com",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/objects/": {
+      "get": {
+        "description": "Get all the lost and found objects",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Add a new object to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Lost-and-found json object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "description",
+                "location_found",
+                "found_by",
+                "date_found"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "location_found": {
+                  "type": "string"
+                },
+                "found_by": {
+                  "type": "string"
+                },
+                "date_found": {
+                  "type": "string"
+                },
+                "retrieved_by": {
+                  "type": "string"
+                },
+                "date_retrieved": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/objects/{id}": {
+      "get": {
+        "description": "Get the object with the given id from the database",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "Get API documentation",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

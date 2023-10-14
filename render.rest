@@ -1,0 +1,19 @@
+# Get all the lost objects.
+GET https://api-pedrosa-per-proj.onrender.com/objects HTTP/1.1
+
+###
+# Get an object by its ID.
+GET https://api-pedrosa-per-proj.onrender.com/objects/6529dff72ec6cdf855bb7ff6 HTTP/1.1
+
+###
+# Create new contact.
+POST https://api-pedrosa-per-proj.onrender.com/objects HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Test",
+  "description": "A test object",
+  "location_found": "Somewhere",
+  "found_by": "6529ee6185a45c0ea89e1520",
+  "date_found": "2023-03-15T14:30:00"
+}
