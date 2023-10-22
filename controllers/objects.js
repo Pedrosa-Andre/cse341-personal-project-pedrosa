@@ -1,8 +1,8 @@
 const ObjectId = require('mongodb').ObjectId;
 const mongodb = require('../db/connect');
-const { checkEmptyFields } = require('../utils/dataTools');
+const Api500Error = require('../error_handling/api500Error');
 
-const getAllObjects = async (req, res) => {
+const getAllObjects = async (req, res, next) => {
   try {
     const Objects = await mongodb
       .getDb()
@@ -12,14 +12,13 @@ const getAllObjects = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({
-      message: 'An error occurred while getting the objects.',
-      error: error.message,
-    });
+    return next(
+      new Api500Error('An error occurred while getting the objects.'),
+    );
   }
 };
 
-const getObjectById = async (req, res) => {
+const getObjectById = async (req, res, next) => {
   try {
     const id = req.params.id;
     const query = {
@@ -33,32 +32,12 @@ const getObjectById = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json({
-      message: 'An error occurred while getting the objects.',
-      error: error.message,
-    });
+    return next(new Api500Error('An error occurred while getting the object.'));
   }
 };
 
-const addNewObject = async (req, res) => {
+const addNewObject = async (req, res, next) => {
   const objectData = req.body;
-  const requiredFields = [
-    'name',
-    'description',
-    'location_found',
-    'found_by',
-    'date_found',
-  ];
-
-  try {
-    checkEmptyFields(objectData, requiredFields);
-  } catch (error) {
-    return res.status(400).json({
-      message: 'An error occurred while adding the object.',
-      error: error.message,
-    });
-  }
-
   try {
     const objects = await mongodb
       .getDb()
@@ -68,15 +47,60 @@ const addNewObject = async (req, res) => {
     const successMessage = `The object was added to the database under the following id: ${result.insertedId}`;
     return res.status(201).send(successMessage);
   } catch (error) {
-    return res.status(500).json({
-      message: 'An error occurred while adding the object.',
-      error: error.message,
-    });
+    return next(new Api500Error('An error occurred while adding the object.'));
   }
+};
+
+const updateObject = async (req, res, next) => {
+  const objectData = req.body;
+
+  try {
+    const id = req.params.id;
+    const query = {
+      _id: new ObjectId(id),
+    };
+    const objects = await mongodb
+      .getDb()
+      .db('per_proj_db')
+      .collection('objects');
+    await objects.updateOne(query, { $set: objectData });
+  } catch (error) {
+    return next(
+      new Api500Error('An error occurred while updating the object.'),
+    );
+  }
+
+  return res.status(204).send();
+};
+
+const deleteObject = async (req, res, next) => {
+  const id = req.params.id;
+
+  try {
+    const query = {
+      _id: new ObjectId(id),
+    };
+    const objects = await mongodb
+      .getDb()
+      .db('per_proj_db')
+      .collection('objects');
+    const result = await objects.deleteOne(query);
+    if (result.deletedCount === 0) {
+      return res.status(204).send();
+    }
+  } catch (error) {
+    return next(
+      new Api500Error('An error occurred while deleting the object.'),
+    );
+  }
+
+  return res.status(200).send();
 };
 
 module.exports = {
   getAllObjects,
   getObjectById,
   addNewObject,
+  updateObject,
+  deleteObject,
 };

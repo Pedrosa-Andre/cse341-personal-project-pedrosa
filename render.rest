@@ -3,17 +3,43 @@ GET https://api-pedrosa-per-proj.onrender.com/objects HTTP/1.1
 
 ###
 # Get an object by its ID.
-GET https://api-pedrosa-per-proj.onrender.com/objects/6529dff72ec6cdf855bb7ff6 HTTP/1.1
+GET https://api-pedrosa-per-proj.onrender.com/objects/6529fc9003d64d6b31a422e6 HTTP/1.1
 
 ###
-# Create new contact.
+# Create new object.
 POST https://api-pedrosa-per-proj.onrender.com/objects HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Test",
-  "description": "A test object",
+  "name": "Debug tool",
+  "description": "Weird apparatus with multiple buttons.",
   "location_found": "Somewhere",
-  "found_by": "6529ee6185a45c0ea89e1520",
-  "date_found": "2023-03-15T14:30:00"
+  "found_by": "6529dd2d2ec6cdf855b9d6e1",
+  "date_found": "2023-03-15T14:30:00",
+  "retrieved_by": null,
+  "date_retrieved": null
 }
+
+###
+# Uptade object.
+PUT https://api-pedrosa-per-proj.onrender.com/objects/6529fc9003d64d6b31a422e6 HTTP/1.1
+content-type: application/json
+
+{
+  "description": "Another desciption here",
+  "location_found": "Outside"
+}
+
+###
+# Uptade object.
+PUT https://api-pedrosa-per-proj.onrender.com/objects/6529fc9003d64d6b31a422e6 HTTP/1.1
+content-type: application/json
+
+{
+  "retrieved_by": "6529dd2d2ec6cdf855b9d6e1",
+  "date_retrieved": "2023-03-15T14:30:00"
+}
+
+###
+# Delete object.
+DELETE https://api-pedrosa-per-proj.onrender.com/objects/653309b2babb3b51220ed8bd HTTP/1.1

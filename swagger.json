@@ -50,16 +50,20 @@
                   "type": "string"
                 },
                 "found_by": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_found": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 8601 formatted date"
                 },
                 "retrieved_by": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_retrieved": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "ISO 8601 formatted date"
                 }
               }
             }
@@ -69,8 +73,8 @@
           "201": {
             "description": "Created"
           },
-          "400": {
-            "description": "Bad Request"
+          "422": {
+            "description": "Invalid Data"
           },
           "500": {
             "description": "Internal Server Error"
@@ -87,12 +91,92 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update an object in the database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Lost-and-found json object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "location_found": {
+                  "type": "string"
+                },
+                "found_by": {
+                  "type": "string",
+                  "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+                },
+                "date_found": {
+                  "type": "string",
+                  "description": "ISO 8601 formatted date"
+                },
+                "retrieved_by": {
+                  "type": "string",
+                  "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+                },
+                "date_retrieved": {
+                  "type": "string",
+                  "description": "ISO 8601 formatted date"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Invalid Data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
