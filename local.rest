@@ -14,10 +14,8 @@ content-type: application/json
   "name": "Debug tool",
   "description": "Weird apparatus with multiple buttons.",
   "location_found": "Somewhere",
-  "found_by": "6529dd2d2ec6cdf855b9d6e1",
-  "date_found": "2023-03-15T14:30:00",
-  "retrieved_by": null,
-  "date_retrieved": null
+  "found_by": "6529dd2d2ec6cdf855b9d6e4",
+  "date_found": "2023-03-15T14:30:00"
 }
 
 ###
