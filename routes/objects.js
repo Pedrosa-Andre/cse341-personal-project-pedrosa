@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 
-const { validationResult } = require('express-validator');
+const { requiresAuth } = require('express-openid-connect');
 const controller = require('../controllers/objects');
 const objectsValidator = require('../validators/objectsValidator');
 
@@ -9,6 +9,7 @@ router.get('/', controller.getAllObjects);
 router.get('/:id', controller.getObjectById);
 router.post(
   '/',
+  requiresAuth(),
   bodyParser.json(),
   objectsValidator.validateObjectCreation,
   objectsValidator.validate,
@@ -16,11 +17,12 @@ router.post(
 );
 router.put(
   '/:id',
+  requiresAuth(),
   bodyParser.json(),
   objectsValidator.validateObjectUpdate,
   objectsValidator.validate,
   controller.updateObject,
 );
-router.delete('/:id', controller.deleteObject);
+router.delete('/:id', requiresAuth(), controller.deleteObject);
 
 module.exports = router;
