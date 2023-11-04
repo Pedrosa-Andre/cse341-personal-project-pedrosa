@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const dotenv = require('dotenv');
 const { auth } = require('express-openid-connect');
-const controller = require('../controllers/auth0');
+const controller = require('../controllers');
 
 dotenv.config();
 
@@ -18,8 +18,8 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 router.use(auth(config));
 
-router.get('/', controller.getLoginStatus);
+router.get('/', controller.auth0.getLoginStatus);
 
-router.get('/profile', controller.getUserProfile);
+router.get('/profile', controller.auth0.getUserProfile);
 
 module.exports = router;

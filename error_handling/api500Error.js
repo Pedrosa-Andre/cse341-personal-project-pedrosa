@@ -4,8 +4,8 @@ const BaseError = require('./baseError');
 class Api500Error extends BaseError {
   constructor(
     name,
-    statusCode = httpStatusCodes.INTERNAL_SERVER,
     description = 'Internal server error.',
+    statusCode = httpStatusCodes.INTERNAL_SERVER,
     isOperational = false,
   ) {
     super(name, statusCode, isOperational, description);

@@ -13,7 +13,10 @@ const getAllObjects = async (req, res, next) => {
     return res.status(200).json(result);
   } catch (error) {
     return next(
-      new Api500Error('An error occurred while getting the objects.'),
+      new Api500Error(
+        'Get Objects Error',
+        'An error occurred while getting the objects.',
+      ),
     );
   }
 };
@@ -32,7 +35,12 @@ const getObjectById = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json(result);
   } catch (error) {
-    return next(new Api500Error('An error occurred while getting the object.'));
+    return next(
+      new Api500Error(
+        'Get Object Error',
+        'An error occurred while getting the object with the given ID.',
+      ),
+    );
   }
 };
 
@@ -47,7 +55,12 @@ const addNewObject = async (req, res, next) => {
     const successMessage = `The object was added to the database under the following id: ${result.insertedId}`;
     return res.status(201).send(successMessage);
   } catch (error) {
-    return next(new Api500Error('An error occurred while adding the object.'));
+    return next(
+      new Api500Error(
+        'Add Object Error',
+        'An error occurred while adding the object.',
+      ),
+    );
   }
 };
 
@@ -66,7 +79,10 @@ const updateObject = async (req, res, next) => {
     await objects.updateOne(query, { $set: objectData });
   } catch (error) {
     return next(
-      new Api500Error('An error occurred while updating the object.'),
+      new Api500Error(
+        'Update Object Error',
+        'An error occurred while updating the object.',
+      ),
     );
   }
 
@@ -90,7 +106,10 @@ const deleteObject = async (req, res, next) => {
     }
   } catch (error) {
     return next(
-      new Api500Error('An error occurred while deleting the object.'),
+      new Api500Error(
+        'Delete Object Error',
+        'An error occurred while deleting the object.',
+      ),
     );
   }
 

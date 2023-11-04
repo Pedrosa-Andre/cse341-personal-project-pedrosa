@@ -5,7 +5,10 @@ const getLoginStatus = async (req, res, next) => {
     return res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   } catch (error) {
     return next(
-      new Api500Error('An error occurred while retrieving login status.'),
+      new Api500Error(
+        'Login Error',
+        'An error occurred while retrieving login status.',
+      ),
     );
   }
 };
@@ -15,7 +18,10 @@ const getUserProfile = async (req, res, next) => {
     return res.send(JSON.stringify(req.oidc.user));
   } catch (error) {
     return next(
-      new Api500Error('An error occurred while getting the user profile.'),
+      new Api500Error(
+        'Get Profile Error',
+        'An error occurred while getting the user profile.',
+      ),
     );
   }
 };

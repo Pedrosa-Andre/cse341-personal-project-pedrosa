@@ -4,8 +4,8 @@ const BaseError = require('./baseError');
 class Api404Error extends BaseError {
   constructor(
     name,
-    statusCode = httpStatusCodes.NOT_FOUND,
     description = 'Not found.',
+    statusCode = httpStatusCodes.NOT_FOUND,
     isOperational = true,
   ) {
     super(name, statusCode, isOperational, description);

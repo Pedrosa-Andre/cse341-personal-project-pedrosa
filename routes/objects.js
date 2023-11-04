@@ -2,18 +2,18 @@ const router = require('express').Router();
 const bodyParser = require('body-parser');
 
 const { requiresAuth } = require('express-openid-connect');
-const controller = require('../controllers/objects');
+const controller = require('../controllers');
 const objectsValidator = require('../validators/objectsValidator');
 
-router.get('/', controller.getAllObjects);
-router.get('/:id', controller.getObjectById);
+router.get('/', controller.objects.getAllObjects);
+router.get('/:id', controller.objects.getObjectById);
 router.post(
   '/',
   requiresAuth(),
   bodyParser.json(),
   objectsValidator.validateObjectCreation,
   objectsValidator.validate,
-  controller.addNewObject,
+  controller.objects.addNewObject,
 );
 router.put(
   '/:id',
@@ -21,8 +21,8 @@ router.put(
   bodyParser.json(),
   objectsValidator.validateObjectUpdate,
   objectsValidator.validate,
-  controller.updateObject,
+  controller.objects.updateObject,
 );
-router.delete('/:id', requiresAuth(), controller.deleteObject);
+router.delete('/:id', requiresAuth(), controller.objects.deleteObject);
 
 module.exports = router;

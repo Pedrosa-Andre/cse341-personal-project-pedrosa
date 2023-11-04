@@ -4,12 +4,11 @@ const BaseError = require('./baseError');
 class Api422Error extends BaseError {
   constructor(
     name,
-    errors = '',
-    statusCode = httpStatusCodes.INVALID_DATA,
     description = 'Invalid data.',
+    statusCode = httpStatusCodes.INVALID_DATA,
     isOperational = true,
   ) {
-    super(name, statusCode, isOperational, `${description}\n ${errors}`);
+    super(name, statusCode, isOperational, description);
   }
 }
 
