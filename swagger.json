@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CSE341 - Andre Pedrosa - Personal Project",
-    "description": "An API to keep track of lost and found objects on the university",
+    "description": "An API to keep track of lost and found objects in the university",
     "version": "1.0.0"
   },
   "host": "api-pedrosa-per-proj.onrender.com",
@@ -23,7 +23,7 @@
         }
       },
       "post": {
-        "description": "Add a new object to the database",
+        "description": "Add a new object to the database. You must be logged to perform this action.",
         "parameters": [
           {
             "name": "body",
@@ -41,28 +41,40 @@
               ],
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Smartphone",
+                  "minLength": 2
                 },
                 "description": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Motorola X with white cover.",
+                  "minLength": 3
                 },
                 "location_found": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Library, on the carpet next to the sci-fy section.",
+                  "minLength": 3
                 },
                 "found_by": {
                   "type": "string",
+                  "example": "6529dd2d2ec6cdf855b9d6e4",
                   "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_found": {
                   "type": "string",
+                  "example": "2023-03-20T08:30:00",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
                   "description": "ISO 8601 formatted date"
                 },
                 "retrieved_by": {
                   "type": "string",
+                  "example": "6529dd782ec6cdf855ba035e",
                   "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_retrieved": {
                   "type": "string",
+                  "example": "2023-03-23T09:30:00",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
                   "description": "ISO 8601 formatted date"
                 }
               }
@@ -105,7 +117,7 @@
         }
       },
       "put": {
-        "description": "Update an object in the database",
+        "description": "Update an object in the database. You must be logged to perform this action.",
         "parameters": [
           {
             "name": "id",
@@ -123,28 +135,40 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Tablet",
+                  "minLength": 2
                 },
                 "description": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Samsung S, scratched.",
+                  "minLength": 3
                 },
                 "location_found": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "Reception",
+                  "minLength": 3
                 },
                 "found_by": {
                   "type": "string",
+                  "example": "6529dd2d2ec6cdf855b9d6e4",
                   "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_found": {
                   "type": "string",
+                  "example": "2023-03-20T08:30:00",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
                   "description": "ISO 8601 formatted date"
                 },
                 "retrieved_by": {
                   "type": "string",
+                  "example": "6529dd782ec6cdf855ba035e",
                   "description": "24 character hex string, 12 byte Uint8Array, or an integer"
                 },
                 "date_retrieved": {
                   "type": "string",
+                  "example": "2023-03-23T09:30:00",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
                   "description": "ISO 8601 formatted date"
                 }
               }
@@ -164,7 +188,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete the object with the given id from the database. You must be logged to perform this action.",
         "parameters": [
           {
             "name": "id",
