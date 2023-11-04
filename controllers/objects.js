@@ -4,11 +4,11 @@ const Api500Error = require('../error_handling/api500Error');
 
 const getAllObjects = async (req, res, next) => {
   try {
-    const Objects = await mongodb
+    const objects = await mongodb
       .getDb()
       .db('per_proj_db')
       .collection('objects');
-    const result = await Objects.find().toArray();
+    const result = await objects.find().toArray();
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json(result);
   } catch (error) {
@@ -27,11 +27,11 @@ const getObjectById = async (req, res, next) => {
     const query = {
       _id: new ObjectId(id),
     };
-    const Objects = await mongodb
+    const objects = await mongodb
       .getDb()
       .db('per_proj_db')
       .collection('objects');
-    const result = await Objects.find(query).toArray();
+    const result = await objects.find(query).toArray();
     res.setHeader('Content-Type', 'application/json');
     return res.status(200).json(result);
   } catch (error) {

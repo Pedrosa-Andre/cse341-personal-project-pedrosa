@@ -208,6 +208,203 @@
         }
       }
     },
+    "/students/": {
+      "get": {
+        "description": "Get all the students",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Add a new student to the database. You must be logged to perform this action.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Student json object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "first_name",
+                "last_name",
+                "email",
+                "age",
+                "gender",
+                "major",
+                "year"
+              ],
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "Bob",
+                  "minLength": 2
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Smith",
+                  "minLength": 2
+                },
+                "email": {
+                  "type": "string",
+                  "example": "bob_smith@example.edu.",
+                  "pattern": ".+@.+\\..+"
+                },
+                "age": {
+                  "type": "integer",
+                  "example": 20,
+                  "minimum": 14
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male",
+                  "pattern": "^(?i)\\s*(male|female)\\s*$"
+                },
+                "major": {
+                  "type": "string",
+                  "example": "Computer Science",
+                  "minLength": 5
+                },
+                "year": {
+                  "type": "integer",
+                  "minimum": 2000,
+                  "maximum": 2024
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Invalid Data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/students/{id}": {
+      "get": {
+        "description": "Get the student with the given id from the database",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update an student in the database. You must be logged to perform this action.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Student json object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "Bob",
+                  "minLength": 2
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Smith",
+                  "minLength": 2
+                },
+                "email": {
+                  "type": "string",
+                  "example": "bob_smith@example.edu.",
+                  "pattern": ".+@.+\\..+"
+                },
+                "age": {
+                  "type": "integer",
+                  "example": 20,
+                  "minimum": 14
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male",
+                  "pattern": "^(?i)\\s*(male|female)\\s*$"
+                },
+                "major": {
+                  "type": "string",
+                  "example": "Computer Science",
+                  "minLength": 5
+                },
+                "year": {
+                  "type": "integer",
+                  "minimum": 2000,
+                  "maximum": 2024
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Invalid Data"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete the student with the given id from the database. You must be logged to perform this action.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "24 character hex string, 12 byte Uint8Array, or an integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api-docs": {
       "get": {
         "description": "Get API documentation",
