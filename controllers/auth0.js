@@ -1,4 +1,5 @@
 const Api500Error = require('../error_handling/api500Error');
+const Api401Error = require('../error_handling/api401Error');
 
 const getLoginStatus = async (req, res, next) => {
   try {
@@ -15,6 +16,14 @@ const getLoginStatus = async (req, res, next) => {
 
 const getUserProfile = async (req, res, next) => {
   try {
+    if (!req.oidc.isAuthenticated()) {
+      return next(
+        new Api401Error(
+          'Not Logged In',
+          'You are not authorized to access this page. Please log in first.',
+        ),
+      );
+    }
     return res.send(JSON.stringify(req.oidc.user));
   } catch (error) {
     return next(
